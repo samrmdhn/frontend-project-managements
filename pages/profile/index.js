@@ -3,7 +3,6 @@ import unauthpage from "../../middleware/unauthpage";
 
 export async function getServerSideProps(ctx) {
   const DATA_JWT = unauthpage(ctx);
-  console.log(DATA_JWT);
   return {
     props: {
       DATA_JWT,
@@ -14,7 +13,6 @@ export async function getServerSideProps(ctx) {
 export default function Profile({ DATA_JWT }) {
   const { id, username } = DATA_JWT.decoded;
   const { token } = DATA_JWT;
-  console.log(DATA_JWT);
 
   const getData = async () => {
     try {

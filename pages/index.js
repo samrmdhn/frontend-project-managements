@@ -44,8 +44,10 @@ export default function Home() {
 
       console.log(datas);
 
+      console.log(datas.token);
+
       if (datas.token) {
-        Cookie.set("token", datas.token);
+        Cookie.set("token", datas.token, { expires: 1 });
         Router.push("/dashboard");
       }
     } catch (error) {
