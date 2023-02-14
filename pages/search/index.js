@@ -15,6 +15,12 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 
 import Slider from "@mui/material/Slider";
+import Sidebar from "../../components/Sidebar";
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Search(props) {
   dayjs.extend(localizedFormat);
@@ -23,12 +29,49 @@ export default function Search(props) {
 
   const router = useRouter();
 
+  const [dataChart, setDataChart] = useState(props.projects.data);
+
   //PROPS SSR
 
   //PAGINATION
   const datas = props.datas.data;
   const datasLength = props.datas.length;
   const range = props.datas.range;
+
+  //COMPANY INFO
+
+  console.log(dataChart);
+
+  const settingChart = {
+    labels: dataChart.projects_of_company.map((project) => {
+      return project.name;
+    }),
+    datasets: [
+      {
+        label: "# of Votes",
+        data: dataChart.projects_of_company.map((project) => {
+          return project._count.projects;
+        }),
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   //ROLE BASED ACCESS
   const { role } = props.DATA_JWT.decoded;
@@ -104,6 +147,9 @@ export default function Search(props) {
     <div>
       <Navbar role={role} />
       <h3>Search page</h3>
+      <div style={{ height: "400px", marginBottom: "20px" }}>
+        <Doughnut data={settingChart} />;
+      </div>
       <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
         <div
           style={{
@@ -147,7 +193,6 @@ export default function Search(props) {
           </Button>
         </div>
       </form>
-
       {datas.slice(0, 5).map((data, index) => {
         return (
           <div key={index}>
@@ -222,9 +267,23 @@ export async function getServerSideProps(ctx) {
       return response;
     });
 
+  const project = await axios
+    .get("http://localhost:3001/company", {
+      headers: {
+        Authorization: "Bearer " + DATA_JWT.token,
+      },
+    })
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   return {
     props: {
       DATA_JWT,
+      projects: project.data,
       datas: data.data,
     },
   };
