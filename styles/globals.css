@@ -1,0 +1,40 @@
+body {
+    margin: 0px;
+}
+
+.swiper-button-next {
+    left: 20% !important;
+    content: unset !important;
+  }
+
+  .swiper-button-prev {
+    left: 10% !important;
+     transform: rotate(180deg) !important;
+  }
+
+   .swiper-button-prev::after {
+    all: unset !important;
+    top: 20%;
+    transform: rotate(180deg);
+  }
+
+  .swiper-button-next::before {
+    all: unset !important;
+    top: 20%
+  }
+
+  .swiper-button-next::after {
+    all: unset !important;
+    top: 20%
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    top: 90% !important;
+    width: 40px !important;
+    position: relative;
+    width: 64px !important;
+    height: 64px !important;
+    transform: none;
+    margin: 40px 16px 0 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M33.8828 24.666C35.4877 27.2134 39.7979 32.3083 44.1999 32.3083' stroke='white'/%3E%3Cpath d='M33.8828 40.332C35.4877 37.6572 39.7979 32.3076 44.1999 32.3076' stroke='white'/%3E%3Cpath d='M44.2 32.3086H20.7' stroke='white'/%3E%3Crect x='0.5' y='0.5' width='63' height='63' rx='31.5' stroke='white'/%3E%3C/svg%3E") !important;
+  }

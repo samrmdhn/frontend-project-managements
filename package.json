@@ -12,9 +12,11 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.2",
     "@next/font": "13.0.7",
     "axios": "^1.2.2",
+    "chart.js": "^4.2.0",
     "dayjs": "^1.11.7",
     "eslint": "8.30.0",
     "eslint-config-next": "13.0.7",
@@ -24,6 +26,8 @@
     "next": "13.0.7",
     "next-cookies": "^2.0.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "18.2.0",
+    "swiper": "^9.0.1"
   }
 }
