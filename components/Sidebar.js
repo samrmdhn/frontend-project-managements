@@ -1,4 +1,5 @@
-import { Typography } from "@mui/material";import Link from "next/link";
+import { Typography } from "@mui/material";
+import Link from "next/link";
 export default function Sidebar() {
   const listItems = [
     {
